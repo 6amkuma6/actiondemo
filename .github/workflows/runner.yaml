@@ -1,0 +1,31 @@
+name: AWS EC2 Runner Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-ec2-runner:
+    runs-on: [self-hosted, linux, ec2]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print System Info
+        run: |
+          echo "Running on AWS EC2 self-hosted runner"
+          uname -a
+          whoami
+          lsb_release -a || cat /etc/os-release
+
+      - name: Check AWS CLI
+        run: aws --version
+
+      - name: Verify Instance Metadata
+        run: curl -s http://169.254.169.254/latest/meta-data/
+
+      - name: List S3 Buckets (Example)
+        env:
+          AWS_REGION: us-east-1
+        run: aws s3 ls --region $AWS_REGION
