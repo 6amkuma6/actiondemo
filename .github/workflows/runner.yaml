@@ -23,9 +23,6 @@ jobs:
       - name: Check AWS CLI
         run: aws --version
 
-      - name: Verify Instance Metadata
-        run: curl -s http://169.254.169.254/latest/meta-data/
-
       - name: List S3 Buckets (Example)
         env:
           AWS_REGION: ap-south-1
