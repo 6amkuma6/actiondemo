@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test-ec2-runner:
+  runner:
     runs-on: [self-hosted, linux, ec2]
     steps:
       - name: Checkout code
