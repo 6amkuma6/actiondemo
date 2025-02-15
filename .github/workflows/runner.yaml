@@ -1,29 +1,29 @@
-name: AWS EC2 Runner Test
+name: Test AWS Runner
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allows manual trigger from GitHub Actions
 
 jobs:
-  runner:
-    runs-on: self-hosted
+  test-runner:
+    runs-on: self-hosted # This ensures it runs on your AWS self-hosted runner
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Print System Info
+      - name: Print system info
         run: |
-          echo "Running on AWS EC2 self-hosted runner"
+          echo "Testing the AWS Linux Runner"
           uname -a
-          pwd
-          whoami
           lsb_release -a || cat /etc/os-release
+          whoami
+          df -h
+          free -m
 
-      - name: Check AWS CLI
-        run: aws --version
-
-      - name: List S3 Buckets (Example)
-        env:
-          AWS_REGION: ap-south-1
-        run: aws s3 ls --region $AWS_REGION
+      - name: Test basic commands
+        run: |
+          echo "Runner is working!"
+          pwd
+          ls -la
