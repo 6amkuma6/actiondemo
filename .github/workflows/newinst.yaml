@@ -11,7 +11,7 @@ on:
 
 jobs:
   setup-tools:
-    runs-on: ubuntu-latest
+    runs-on: shelfhost-runner
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
