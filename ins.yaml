@@ -1,5 +1,15 @@
 # cloud-init YAML script for setting up a DevOps environment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger from GitHub Actions
 
+jobs:
+  test-runner:
+    runs-on: self-hosted # This ensures it runs on your AWS self-hosted runner
+    steps:
+      - name: Checkout code
 #cloud-config
 package_update: true
 package_upgrade: true
