@@ -22,15 +22,16 @@ jobs:
           sudo apt install -y curl wget unzip tar git jq tree vim nano dnsutils net-tools \
                               software-properties-common apt-transport-https ca-certificates \
                               gnupg python3 python3-pip
+                              
+- name: Uninstall AWS CLI
+  run: sudo rm -rf /usr/local/aws-cli
 
-      - name: Install AWS CLI
-        run: |
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-          unzip /tmp/awscliv2.zip -d /tmp && sudo /tmp/aws/install
-          rm -rf /tmp/awscliv2.zip /tmp/aws
+- name: Install AWS CLI
+  run: |
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip -o awscliv2.zip
+    sudo ./aws/install
 
-      - name: Checkout Code
-        uses: actions/checkout@v3
 
       - name: Install Terraform
         run: |
