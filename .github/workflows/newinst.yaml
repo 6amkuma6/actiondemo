@@ -29,11 +29,19 @@ jobs:
           unzip /tmp/awscliv2.zip -d /tmp && sudo /tmp/aws/install
           rm -rf /tmp/awscliv2.zip /tmp/aws
 
-      - name: Install Terraform
-        run: |
-          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-          sudo apt update && sudo apt install -y terraform
+     - name: Install Terraform and Required Packages
+  run: |
+    # Fix GPG key issue
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+    # Add HashiCorp repository
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+    # Update package list
+    sudo apt update
+
+    # Install Terraform and useful AWS/YAML tools
+    sudo apt install -y terraform jq yq awscli
 
       - name: Install kubectl
         run: |
