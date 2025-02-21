@@ -29,7 +29,6 @@ jobs:
           unzip /tmp/awscliv2.zip -d /tmp && sudo /tmp/aws/install
           rm -rf /tmp/awscliv2.zip /tmp/aws
 
-
       - name: Install Terraform
         run: |
           curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
