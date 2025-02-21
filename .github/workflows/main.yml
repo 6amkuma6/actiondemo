@@ -1,13 +1,1 @@
-version: 0.2
-
-phases:
-  pre_build:
-    commands:
-      - echo "Starting AWS Runner Test"
-  build:
-    commands:
-      - echo "Hello from AWS Runner"
-  post_build:
-    commands:
-      - echo "AWS Runner Test Completed"
 
